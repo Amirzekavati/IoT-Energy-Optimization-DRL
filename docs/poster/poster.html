@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>پوستر — IoT Energy Optimization with DQN</title>
+  <style>
+    :root {
+      --ink: #1a2332;
+      --muted: #4a5568;
+      --line: #cfd6e0;
+      --bg: #f7f8fa;
+      --card: #ffffff;
+      --accent: #0f4c81;
+      --accent-soft: #e8f1f8;
+      --good: #1b6b3a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #d9dde5;
+      color: var(--ink);
+      font-family: "Tahoma", "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    .poster {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12px auto;
+      padding: 10mm;
+      background: var(--bg);
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 6mm;
+      box-shadow: 0 8px 24px rgba(0,0,0,.15);
+    }
+
+    header {
+      background: var(--accent);
+      color: #fff;
+      padding: 8mm 7mm;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 3mm;
+      font-size: 18pt;
+      font-weight: 700;
+    }
+
+    header .en {
+      margin: 0 0 4mm;
+      font-size: 10pt;
+      opacity: .92;
+      direction: ltr;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    header .meta {
+      margin: 0;
+      font-size: 9pt;
+      opacity: .95;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr 0.95fr;
+      gap: 5mm;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 4.5mm;
+    }
+
+    section h2 {
+      margin: 0 0 3mm;
+      font-size: 11pt;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent-soft);
+      padding-bottom: 2mm;
+    }
+
+    p, li {
+      margin: 0 0 2mm;
+      font-size: 8.5pt;
+      color: var(--ink);
+    }
+
+    ul { margin: 0; padding-right: 4.5mm; }
+
+    .highlight {
+      background: var(--accent-soft);
+      border: 1px solid #b7d0e6;
+      border-radius: 3px;
+      padding: 2.5mm 3mm;
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: var(--good);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.5pt;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 1.6mm 1.8mm;
+      text-align: center;
+    }
+
+    th {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    tr.best td {
+      background: #eef8f1;
+      font-weight: 700;
+    }
+
+    figure {
+      margin: 2mm 0 0;
+      text-align: center;
+    }
+
+    figure img {
+      max-width: 100%;
+      max-height: 52mm;
+      object-fit: contain;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    figcaption {
+      margin-top: 1.5mm;
+      font-size: 7pt;
+      color: var(--muted);
+    }
+
+    footer {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 5mm;
+    }
+
+    .note {
+      font-size: 7.5pt;
+      color: var(--muted);
+      margin-top: 2mm;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .poster {
+        margin: 0;
+        box-shadow: none;
+        width: 100%;
+        min-height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <article class="poster">
+    <header>
+      <h1>بهینه‌سازی مصرف انرژی در شبکه‌های اینترنت اشیا با یادگیری تقویتی عمیق</h1>
+      <p class="en">IoT Energy Optimization using Deep Reinforcement Learning (DQN)</p>
+      <p class="meta">
+        دانشجو: .............................. |
+        استاد راهنما: .............................. |
+        دانشگاه / دانشکده: .............................. |
+        ۱۴۰۴
+      </p>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2>مسئله و انگیزه</h2>
+        <p>نودهای حسگر IoT با باتری محدود کار می‌کنند. ارسال مداوم عمر شبکه را کم می‌کند و خواب بیش‌ازحد کیفیت پایش را کاهش می‌دهد.</p>
+        <p>اتصالات جهانی IoT از حدود ۲۱ میلیارد (۲۰۲۵) به حدود ۴۸ میلیارد (۲۰۳۵) می‌رسد؛ بنابراین تصمیم هوشمند Transmit/Sleep ضروری است.</p>
+      </section>
+
+      <section>
+        <h2>اهداف</h2>
+        <ul>
+          <li>شبیه‌سازی شبکه IoT با مدل انرژی</li>
+          <li>آموزش DQN برای تصمیم ارسال یا خواب</li>
+          <li>مقایسه با Always Transmit / Sleep / Random</li>
+          <li>داشبورد تعاملی با Streamlit</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="grid-3">
+      <section>
+        <h2>معماری سیستم</h2>
+        <p><strong>UI → Simulation → RL (DQN) → Analytics</strong></p>
+        <figure>
+          <img src="../../assets/architecture/high_level_architecture.png" alt="High-level architecture" />
+          <figcaption>معماری چهارلایه‌ای سامانه</figcaption>
+        </figure>
+        <p class="note">ابزارها: Python، Gymnasium، Stable-Baselines3، Streamlit</p>
+      </section>
+
+      <section>
+        <h2>روش</h2>
+        <ul>
+          <li>حالت نود: active / sleep / dead</li>
+          <li>مشاهده: انرژی + زنده بودن + زمان</li>
+          <li>عمل: Sleep یا Transmit برای هر نود</li>
+          <li>پاداش: بسته و عمر بیشتر − مصرف انرژی</li>
+        </ul>
+        <figure>
+          <img src="../../assets/charts/energy_curves.png" alt="Energy curves" />
+          <figcaption>انرژی کل در طول زمان</figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h2>نتایج کلیدی</h2>
+        <p class="note">۳ نود، افق ۵۰، آموزش ۸۰۰۰ گام، میانگین ۵ اپیزود</p>
+        <table>
+          <thead>
+            <tr>
+              <th>سیاست</th>
+              <th>Lifetime</th>
+              <th>Packets</th>
+              <th>Energy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Transmit</td>
+              <td>17</td>
+              <td>48</td>
+              <td>0.00</td>
+            </tr>
+            <tr>
+              <td>Sleep</td>
+              <td>50</td>
+              <td>0</td>
+              <td>2.85</td>
+            </tr>
+            <tr>
+              <td>Random</td>
+              <td>38.6</td>
+              <td>48</td>
+              <td>0.00</td>
+            </tr>
+            <tr class="best">
+              <td>DQN</td>
+              <td>50</td>
+              <td>42</td>
+              <td>0.37</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="highlight" style="margin-top:3mm;">
+          DQN عمر شبکه را حفظ می‌کند و هم‌زمان داده تحویل می‌دهد.
+        </p>
+        <figure>
+          <img src="../../assets/charts/policy_comparison.png" alt="Policy comparison" />
+          <figcaption>مقایسه معیارهای سیاست‌ها</figcaption>
+        </figure>
+      </section>
+    </div>
+
+    <footer>
+      <section>
+        <h2>نتیجه‌گیری و کارهای آینده</h2>
+        <p>DQN می‌تواند مصالحه میان تحویل بسته و حفظ انرژی را یاد بگیرد. داشبورد امکان آموزش، اجرا و مقایسه سیاست‌ها را فراهم می‌کند.</p>
+        <p><strong>آینده:</strong> Multi-Agent RL، مدل کانال واقعی، مسیریابی چندگامه، آزمایش سخت‌افزاری.</p>
+      </section>
+      <section>
+        <h2>مراجع منتخب</h2>
+        <ul>
+          <li>[1] Transforma Insights, 2026</li>
+          <li>[4] Heinzelman et al., LEACH, 2000</li>
+          <li>[8] Banerjee et al., NashDQNSleep, 2025</li>
+          <li>[9] Leong et al., DRL Scheduling, 2018</li>
+        </ul>
+      </section>
+    </footer>
+  </article>
+</body>
+</html>
