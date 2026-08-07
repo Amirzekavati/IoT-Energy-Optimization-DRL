@@ -1,20 +1,31 @@
 # پوستر پروژه
 
-## فایل‌ها
+## فایل نهایی PowerPoint
+
+`IoT_Energy_Optimization_Poster.pptx`
+
+ساخته‌شده از قالب Lockwood 4:3 با محتوای پروژه و نمودارها.
+
+بازسازی دوباره:
+
+```powershell
+python scripts/build_poster.py
+```
+
+مشخصات هدر:
+- دانشجو: امیرمحمد ذکاوتی
+- استاد راهنما: دکتر منیره عبدوس
+- دانشگاه: دانشگاه شهید بهشتی
+
+## سایر فایل‌ها
 
 | فایل | کاربرد |
 |------|--------|
-| `poster_content.md` | متن نهایی آماده کپی در PowerPoint/Canva |
-| `poster.html` | پیش‌نمایش قابل چاپ در مرورگر |
-| `poster_outline.md` | طرح اولیه بلوک‌ها |
+| `poster_content.md` | متن خام |
+| `poster.html` | پیش‌نمایش مرورگر |
+| `IoT_Energy_Optimization_Poster.pptx` | فایل نهایی ارائه |
 
-## نحوه مشاهده پوستر HTML
-
-1. فایل `docs/poster/poster.html` را در مرورگر باز کنید
-2. برای چاپ: `Ctrl + P` → Paper size A4/A3 (یا Scale to fit)
-3. جای خالی نام دانشجو / استاد / دانشگاه را قبل از چاپ پر کنید
-
-## تصاویر مورد استفاده
+## تصاویر استفاده‌شده
 
 - `assets/architecture/high_level_architecture.png`
 - `assets/charts/policy_comparison.png`
