@@ -24,7 +24,9 @@ class Settings:
     PACKET_SIZE = 32  # bytes (kept simple for now)
     RANDOM_SEED = 42
 
-    # --- RL (used later) ---
+    # --- RL ---
     LEARNING_RATE = 0.001
     GAMMA = 0.95
     TRAIN_TIMESTEPS = 10000
+    MODEL_DIR = "experiments/models"
+    MODEL_NAME = "dqn_iot_energy"
