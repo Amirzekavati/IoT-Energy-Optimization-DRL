@@ -1,84 +1,97 @@
 # IoT Energy Optimization using Deep Reinforcement Learning
 
-This project focuses on optimizing energy consumption in IoT networks using Deep Reinforcement Learning (DRL).
+شبیه‌سازی شبکه حسگر IoT با باتری محدود و بهینه‌سازی تصمیم **ارسال / خواب** با عامل **DQN**.
 
-A simulation environment is designed consisting of IoT sensor nodes with limited battery energy. The system generates synthetic sensor data and uses a DRL agent to decide whether nodes should transmit data or switch to sleep mode in order to reduce energy consumption and increase network lifetime.
+پروژه شامل شبیه‌ساز، محیط Gymnasium، آموزش DQN، داشبورد Streamlit، ارزیابی سیاست‌ها، پیش‌نویس گزارش و پوستر است.
 
-The project includes:
-- IoT network simulation
-- Energy consumption modeling
-- Packet generation and scheduling
-- Deep Reinforcement Learning (DQN)
-- Streamlit-based visualization dashboard
-- Metrics analysis and evaluation
+## Features
+
+- IoT network simulation (Node, Packet, Gateway, Energy model)
+- Baseline policies: Always Transmit / Always Sleep / Random
+- Deep Q-Network with Stable-Baselines3
+- Metrics and policy comparison charts
+- Streamlit dashboard for run / train / compare
+- Report draft + printable poster under `docs/`
 
 ## Technologies
 
-- Python
-- Streamlit
-- Gymnasium
-- Stable-Baselines3
-- NumPy
-- Pandas
-- Matplotlib
-- Jupyter Notebook
+- Python, Streamlit, Gymnasium, Stable-Baselines3
+- NumPy, Pandas, Matplotlib, Altair, Jupyter
 
-## Structure
+## Project structure
 
 ```text
-Iot-Energy-Optimization-DRL/
-│
+IoT-Energy-Optimization-DRL/
 ├── app/
-│   ├── ui/
-│   │   ├── dashboard.py
-│   │   ├── controls.py
-│   │   ├── charts.py
-│   │   └── node_manager.py
-│   │
-│   ├── simulation/
-│   │   ├── node.py
-│   │   ├── gateway.py
-│   │   ├── packet.py
-│   │   ├── energy_model.py
-│   │   ├── simulator.py
-│   │   └── scheduler.py
-│   │
-│   ├── rl/
-│   │   ├── environment.py
-│   │   ├── reward.py
-│   │   ├── dqn_agent.py
-│   │   └── trainer.py
-│   │
-│   ├── analytics/
-│   │   ├── metrics.py
-│   │   ├── evaluator.py
-│   │   └── plots.py
-│   │
-│   ├── config/
-│   │   └── settings.py
-│   │
-│   └── main.py
-│
-├── experiments/
-│
+│   ├── ui/            # Streamlit dashboard
+│   ├── simulation/    # Node, packet, gateway, simulator
+│   ├── rl/            # Env, reward, DQN, trainer
+│   ├── analytics/     # Metrics, evaluation, plots
+│   └── config/        # Settings
+├── notebooks/         # Step-by-step experiments
 ├── docs/
-│   ├── report/
-│   ├── poster/
+│   ├── report/        # Chapters 1-5 (Persian draft)
+│   ├── poster/        # Poster content + HTML preview
 │   ├── diagrams/
 │   └── references/
-│
+├── experiments/       # Saved models (gitignored)
 ├── tests/
-│
+├── main.py
 ├── requirements.txt
-├── README.md
-└── .gitignore
+└── README.md
+```
 
-## Run Project
+## Setup
 
 ```bash
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# Linux / macOS
+source venv/bin/activate
+
 pip install -r requirements.txt
+```
+
+## Run dashboard
+
+```bash
 streamlit run main.py
+```
 
----
+Suggested UI flow:
 
-Project is currently under development.
+1. Set nodes (≤ 10), steps, energy costs
+2. Click **Train DQN**
+3. Run with policy **DQN**
+4. Click **Compare Policies**
+
+## Smoke test
+
+```bash
+python tests/test_smoke.py
+```
+
+## Notebooks
+
+| Notebook | Purpose |
+|----------|---------|
+| `01_node_simulation.ipynb` | Node + energy |
+| `02_simulation_core.ipynb` | Simulator baselines |
+| `03_packet_generation.ipynb` | Packet + gateway |
+| `04_rl_environment_testing.ipynb` | Gym env |
+| `05_dqn_training.ipynb` | DQN train |
+| `06_results_analysis.ipynb` | Comparison plots |
+
+## Docs
+
+- Report chapters: `docs/report/`
+- Poster text: `docs/poster/poster_content.md`
+- Poster preview: open `docs/poster/poster.html` in a browser
+- References: `docs/references/references.bib`
+
+## License / status
+
+Bachelor project — implementation and documentation drafts are ready for final university formatting.
