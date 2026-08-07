@@ -9,9 +9,11 @@ from app.config.settings import Settings
 
 def render_controls():
     """
-    Draw sidebar widgets and return (settings, policy_name).
+    Draw sidebar widgets and return a control dict.
 
-    policy_name is one of: "always_transmit", "always_sleep"
+    Keys:
+      settings, policy_name, train_timesteps,
+      run_clicked, train_clicked, compare_clicked
     """
     st.sidebar.header("Simulation Controls")
 
@@ -20,8 +22,9 @@ def render_controls():
     num_nodes = st.sidebar.slider(
         "Number of nodes",
         min_value=1,
-        max_value=50,
-        value=defaults.NUM_NODES,
+        max_value=10,
+        value=min(defaults.NUM_NODES, 10),
+        help="Max 10 so the action space stays DQN-friendly (Discrete 2^n).",
     )
     max_steps = st.sidebar.slider(
         "Max steps",
@@ -71,14 +74,37 @@ def render_controls():
         format="%.4f",
     )
 
+    st.sidebar.subheader("Policy")
     policy_label = st.sidebar.selectbox(
-        "Scheduler policy",
-        options=["Always Transmit", "Always Sleep"],
+        "Run policy",
+        options=[
+            "Always Transmit",
+            "Always Sleep",
+            "Random",
+            "DQN",
+        ],
         index=0,
     )
-    policy_name = (
-        "always_sleep" if policy_label == "Always Sleep" else "always_transmit"
+    policy_map = {
+        "Always Transmit": "always_transmit",
+        "Always Sleep": "always_sleep",
+        "Random": "random",
+        "DQN": "dqn",
+    }
+    policy_name = policy_map[policy_label]
+
+    st.sidebar.subheader("DQN training")
+    train_timesteps = st.sidebar.slider(
+        "Train timesteps",
+        min_value=500,
+        max_value=20_000,
+        value=min(defaults.TRAIN_TIMESTEPS, 3000),
+        step=500,
     )
+
+    run_clicked = st.sidebar.button("Run Simulation", type="primary")
+    train_clicked = st.sidebar.button("Train DQN")
+    compare_clicked = st.sidebar.button("Compare Policies")
 
     settings = Settings()
     settings.NUM_NODES = int(num_nodes)
@@ -88,7 +114,13 @@ def render_controls():
     settings.TX_ENERGY = float(tx_energy)
     settings.SENSE_ENERGY = float(sense_energy)
     settings.SLEEP_ENERGY = float(sleep_energy)
+    settings.TRAIN_TIMESTEPS = int(train_timesteps)
 
-    run_clicked = st.sidebar.button("Run Simulation", type="primary")
-
-    return settings, policy_name, run_clicked
+    return {
+        "settings": settings,
+        "policy_name": policy_name,
+        "train_timesteps": int(train_timesteps),
+        "run_clicked": run_clicked,
+        "train_clicked": train_clicked,
+        "compare_clicked": compare_clicked,
+    }

@@ -9,7 +9,7 @@ from app.simulation.scheduler import AlwaysSleepScheduler, Scheduler
 from app.simulation.simulator import Simulator
 
 
-def _run_simulator_policy(settings, scheduler, seed):
+def run_simulator_policy(settings, scheduler, seed):
     sim = Simulator(settings=settings, scheduler=scheduler, seed=seed)
     history = sim.run()
     summary = sim.summary()
@@ -18,10 +18,12 @@ def _run_simulator_policy(settings, scheduler, seed):
         "history": history,
         "summary": summary,
         "metrics": metrics,
+        "nodes": sim.nodes,
+        "gateway": sim.gateway,
     }
 
 
-def _run_env_policy(settings, action_fn, seed):
+def run_env_policy(settings, action_fn, seed):
     env = IoTEnergyEnv(settings=settings, seed=seed)
     obs, info = env.reset(seed=seed)
     env.action_space.seed(seed)
@@ -44,6 +46,8 @@ def _run_env_policy(settings, action_fn, seed):
         "history": history,
         "summary": summary,
         "metrics": metrics,
+        "nodes": env.simulator.nodes,
+        "gateway": env.simulator.gateway,
     }
 
 
@@ -55,13 +59,13 @@ def evaluate_baselines(settings=None, seed=None, n_episodes=3):
     seed = settings.RANDOM_SEED if seed is None else seed
 
     policy_runners = {
-        "always_transmit": lambda s, ep_seed: _run_simulator_policy(
+        "always_transmit": lambda s, ep_seed: run_simulator_policy(
             s, Scheduler(), ep_seed
         ),
-        "always_sleep": lambda s, ep_seed: _run_simulator_policy(
+        "always_sleep": lambda s, ep_seed: run_simulator_policy(
             s, AlwaysSleepScheduler(), ep_seed
         ),
-        "random": lambda s, ep_seed: _run_env_policy(
+        "random": lambda s, ep_seed: run_env_policy(
             s,
             action_fn=lambda env, obs: env.action_space.sample(),
             seed=ep_seed,
@@ -99,7 +103,7 @@ def evaluate_dqn_agent(agent, settings=None, seed=None, n_episodes=3):
         def action_fn(env, obs, _agent=agent):
             return _agent.predict(obs, deterministic=True)
 
-        out = _run_env_policy(settings, action_fn=action_fn, seed=ep_seed)
+        out = run_env_policy(settings, action_fn=action_fn, seed=ep_seed)
         episode_metrics.append(out["metrics"])
         last_history = out["history"]
 
