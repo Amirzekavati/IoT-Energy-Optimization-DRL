@@ -1,0 +1,123 @@
+Reference ID:
+[1]
+
+Topic:
+IoT Statistics
+
+Usage:
+Introduction Section
+
+IEEE:
+[1] Transforma Insights, “Global IoT connections will grow from 21 billion in 2025 to 48 billion in 2035,” Apr. 17, 2026. [Online]. Available: https://transformainsights.com/news/global-iot-connections-2025-2035
+
+---
+
+Reference ID:
+[2]
+
+Topic:
+Machine Learning in Wireless Sensor Networks
+
+Usage:
+Background of Intelligent Energy Management in IoT Networks
+
+IEEE:
+[2] M. Alsheikh, S. Lin, D. Niyato, and H. Tan, “Machine Learning in Wireless Sensor Networks: Algorithms, Strategies, and Applications,” IEEE Communications Surveys & Tutorials, vol. 16, no. 4, pp. 1996–2018, 2014.
+
+---
+
+Reference ID:
+[3]
+
+Topic:
+Energy Efficient Routing in Wireless Sensor Networks
+
+Usage:
+Energy Consumption Challenges in IoT and WSN
+
+IEEE:
+[3] M. Mohamed, A. Ahmed, and N. Morsy, “Survey on Wireless Sensor Network Applications and Energy Efficient Routing Protocols,” Wireless Personal Communications, vol. 101, no. 2, pp. 1019–1055, 2018.
+
+---
+
+Reference ID:
+[4]
+
+Topic:
+LEACH Energy-Efficient Communication Protocol
+
+Usage:
+Traditional Energy Management Methods in WSN
+
+IEEE:
+[4] W. Heinzelman, A. Chandrakasan, and H. Balakrishnan, “Energy-Efficient Communication Protocol for Wireless Microsensor Networks,” Proceedings of the 33rd Hawaii International Conference on System Sciences, 2000.
+
+---
+
+Reference ID:
+[5]
+
+Topic:
+Intelligent Routing for IoT-enabled Wireless Sensor Networks
+
+Usage:
+Limitations of Traditional Energy Management Approaches
+
+IEEE:
+[5] G. Kaur and P. Chanak, “Energy-Efficient Intelligent Routing Scheme for IoT-enabled Wireless Sensor Networks,” IEEE Internet of Things Journal, vol. 8, no. 14, pp. 11440–11449, 2021.
+
+---
+
+Reference ID:
+[6]
+
+Topic:
+Deep Reinforcement Learning for Wireless Sensor Networks
+
+Usage:
+Deep Reinforcement Learning in IoT Energy Optimization
+
+IEEE:
+[6] X. Meng, H. Kan, and X. Xu, “Deep Reinforcement Learning-Based Topology Optimization for Self-Organized Wireless Sensor Networks,” arXiv:1910.14199, 2019. [Online]. Available: https://arxiv.org/abs/1910.14199.
+
+---
+
+Reference ID:
+[7]
+
+Topic:
+EDRP-GTDQN Routing and Energy Optimization
+
+Usage:
+Related Works – Deep Reinforcement Learning-Based Routing
+
+IEEE:
+[7] N. Liu, J. Wang, F. Tao, Z. Fu, and B. Liu, “EDRP-GTDQN: An Adaptive Routing Protocol for Energy and Delay Optimization in Wireless Sensor Networks Using Game Theory and Deep Reinforcement Learning,” Ad Hoc Networks, vol. 166, 2025.
+
+---
+
+Reference ID:
+[8]
+
+Topic:
+NashDQNSleep Sleep Scheduling Method
+
+Usage:
+Related Works – Sleep Scheduling in Industrial IoT
+
+IEEE:
+[8] P. S. Banerjee, S. Goswami, and D. De, “NashDQNSleep: Nash-based Deep Q-Network Adaptive Sleep Scheduling for Energy Efficiency and Age of Information Optimization in Industrial Internet of Things,” Engineering Applications of Artificial Intelligence, vol. 161, 2025.
+
+---
+
+Reference ID:
+[9]
+
+Topic:
+Deep Reinforcement Learning for Sensor Scheduling
+
+Usage:
+Advanced Deep Reinforcement Learning Approaches in WSN
+
+IEEE:
+[9] A. Leong, S. Dey, and D. E. Quevedo, “Deep Reinforcement Learning for Wireless Sensor Scheduling in Cyber-Physical Systems,” arXiv:1809.05149, 2018. [Online]. Available: https://arxiv.org/abs/1809.05149.

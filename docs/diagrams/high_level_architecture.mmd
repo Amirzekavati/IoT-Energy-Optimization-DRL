@@ -1,0 +1,60 @@
+flowchart TB
+
+%% =========================
+%% STYLE DEFINITIONS
+%% =========================
+
+classDef ui fill:#DCEBFF,stroke:#5B9DFF,stroke-width:2px,color:#111,rx:15,ry:15;
+classDef sim fill:#DFF5E1,stroke:#59C36A,stroke-width:2px,color:#111,rx:15,ry:15;
+classDef rl fill:#FFE8CC,stroke:#FF9F43,stroke-width:2px,color:#111,rx:15,ry:15;
+classDef analytics fill:#EEE4FF,stroke:#9B6DFF,stroke-width:2px,color:#111,rx:15,ry:15;
+
+%% =========================
+%% TITLE
+%% =========================
+
+A["🖥️ Streamlit UI Layer
+────────────────────
+Dashboard
+Controls
+Charts
+Node Manager"]
+
+B["🌐 Simulation Engine
+────────────────────
+Nodes
+Packets
+Gateway
+Scheduler
+Energy Model"]
+
+C["🧠 Reinforcement Learning Layer
+────────────────────
+Environment
+Reward Function
+DQN Agent
+Trainer"]
+
+D["📊 Analytics & Evaluation
+────────────────────
+Metrics
+Plots
+Statistics
+Performance Evaluation"]
+
+%% =========================
+%% CONNECTIONS
+%% =========================
+
+A --> B
+B --> C
+C --> D
+
+%% =========================
+%% APPLY CLASSES
+%% =========================
+
+class A ui
+class B sim
+class C rl
+class D analytics
