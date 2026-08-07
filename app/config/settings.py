@@ -22,6 +22,7 @@ class Settings:
     # --- Simulation ---
     MAX_STEPS = 200
     PACKET_SIZE = 32  # bytes (kept simple for now)
+    RANDOM_SEED = 42
 
     # --- RL (used later) ---
     LEARNING_RATE = 0.001
