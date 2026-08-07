@@ -86,9 +86,12 @@ class Simulator:
         """Stay in (or switch to) sleep and pay the sleep energy cost."""
         return node.sleep()
 
-    def step(self):
+    def step(self, actions=None):
         """
         Run one simulation time step.
+
+        actions: optional dict {node_id: "transmit"|"sleep"}.
+                 If None, the scheduler chooses actions.
 
         Returns a snapshot dict, or None if no alive nodes remain.
         """
@@ -96,7 +99,8 @@ class Simulator:
         if not alive:
             return None
 
-        actions = self.scheduler.decide(self.nodes, self.current_step)
+        if actions is None:
+            actions = self.scheduler.decide(self.nodes, self.current_step)
 
         for node in alive:
             action = actions.get(node.id, Scheduler.SLEEP)
