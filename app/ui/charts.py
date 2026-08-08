@@ -17,6 +17,7 @@ def history_to_dataframe(history):
                 "total_energy",
                 "packets_sent",
                 "packets_received",
+                "mean_aoi",
             ]
         )
     rows = [
@@ -26,6 +27,7 @@ def history_to_dataframe(history):
             "total_energy": row["total_energy"],
             "packets_sent": row["packets_sent"],
             "packets_received": row["packets_received"],
+            "mean_aoi": row.get("mean_aoi", 0.0),
         }
         for row in history
     ]
@@ -33,11 +35,12 @@ def history_to_dataframe(history):
 
 
 def render_summary_metrics(summary):
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
     col1.metric("Steps", summary.get("steps", 0))
     col2.metric("Alive nodes", summary.get("alive", 0))
     col3.metric("Packets received", summary.get("packets_received", 0))
-    col4.metric("Remaining energy", f"{summary.get('total_energy', 0.0):.3f} J")
+    col4.metric("PDR", f"{summary.get('packet_delivery_ratio', 0.0):.2f}")
+    col5.metric("Mean AoI", f"{summary.get('mean_aoi', 0.0):.1f}")
 
 
 def render_history_charts(history):
@@ -55,6 +58,10 @@ def render_history_charts(history):
     st.subheader("Packets received over time")
     st.line_chart(df.set_index("step")[["packets_received"]])
 
+    if "mean_aoi" in df.columns:
+        st.subheader("Mean Age of Information over time")
+        st.line_chart(df.set_index("step")[["mean_aoi"]])
+
 
 def render_comparison(metrics_by_policy, histories=None):
     """Show comparison table and simple bar charts."""
@@ -70,6 +77,8 @@ def render_comparison(metrics_by_policy, histories=None):
             "policy",
             "lifetime_steps",
             "packets_received",
+            "packet_delivery_ratio",
+            "mean_aoi",
             "total_energy_final",
             "energy_efficiency",
             "episode_reward",
@@ -78,10 +87,16 @@ def render_comparison(metrics_by_policy, histories=None):
     ]
     st.dataframe(df[show_cols], use_container_width=True)
 
-    chart_df = df.set_index("policy")[
-        [c for c in ["lifetime_steps", "packets_received", "energy_efficiency"] if c in df.columns]
-    ]
-    st.bar_chart(chart_df)
+    # Separate charts so different units are not stacked misleadingly
+    for col, title in [
+        ("lifetime_steps", "Lifetime"),
+        ("packets_received", "Packets received"),
+        ("mean_aoi", "Mean AoI"),
+        ("packet_delivery_ratio", "PDR"),
+    ]:
+        if col in df.columns:
+            st.caption(title)
+            st.bar_chart(df.set_index("policy")[[col]])
 
     if histories:
         energy_rows = []

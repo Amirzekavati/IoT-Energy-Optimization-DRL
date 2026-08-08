@@ -1,3 +1,4 @@
+from .channel import delivery_probability, distance_between, try_deliver
 from .energy_model import EnergyModel
 from .gateway import Gateway
 from .node import Node
@@ -13,4 +14,7 @@ __all__ = [
     "Packet",
     "Scheduler",
     "Simulator",
+    "delivery_probability",
+    "distance_between",
+    "try_deliver",
 ]

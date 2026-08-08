@@ -24,6 +24,13 @@ class Settings:
     PACKET_SIZE = 32  # bytes (kept simple for now)
     RANDOM_SEED = 42
 
+    # --- Lightweight realism (distance / channel / AoI) ---
+    DISTANCE_REF = 50.0  # meters; reference distance for TX cost and loss
+    TX_DISTANCE_WEIGHT = 0.5  # how strongly distance increases TX energy
+    LOSS_FACTOR = 0.35  # higher => more packet loss with distance
+    MIN_DELIVERY_PROB = 0.45  # never drop below this probability
+    AOI_REWARD_WEIGHT = 0.15  # penalty weight for average Age of Information
+
     # --- RL ---
     LEARNING_RATE = 0.001
     GAMMA = 0.95

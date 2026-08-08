@@ -2,6 +2,9 @@
 One IoT sensor node with a limited battery.
 """
 
+import random
+
+from app.simulation.channel import distance_between, try_deliver
 from app.simulation.energy_model import EnergyModel
 from app.simulation.packet import Packet
 
@@ -23,9 +26,10 @@ class Node:
         self.state = "active"
         self.energy_model = energy_model or EnergyModel()
 
-        # Simple counters for later analysis
         self.packets_sent = 0
         self.packets_received = 0
+        self.packets_dropped = 0
+        self.aoi = 0  # Age of Information (steps since last successful delivery)
         self._next_packet_id = 1
 
     def is_alive(self):
@@ -35,6 +39,9 @@ class Node:
         if self.initial_energy <= 0:
             return 0.0
         return max(self.energy, 0.0) / self.initial_energy
+
+    def distance_to(self, gateway):
+        return distance_between(self.x, self.y, gateway.x, gateway.y)
 
     def _use_energy(self, amount):
         """Reduce battery. If energy finishes, mark node as dead."""
@@ -69,25 +76,35 @@ class Node:
         self._next_packet_id += 1
         return packet
 
-    def transmit(self):
-        """Pay the energy cost of sending one packet."""
+    def transmit(self, distance=0.0):
+        """Pay the energy cost of sending one packet (distance-aware)."""
         if self.state != "active":
             return False
 
-        ok = self._use_energy(self.energy_model.transmit_cost())
+        ok = self._use_energy(self.energy_model.transmit_cost(distance=distance))
         if ok:
             self.packets_sent += 1
         return ok
 
-    def send_packet(self, gateway, packet):
-        """Transmit one packet to the gateway if energy allows."""
+    def send_packet(self, gateway, packet, rng=None):
+        """
+        Transmit one packet to the gateway.
+
+        Energy is always spent on the attempt. Delivery may fail due to distance.
+        """
         if packet is None or self.state != "active":
             return False
 
-        if not self.transmit():
+        distance = self.distance_to(gateway)
+        if not self.transmit(distance=distance):
             return False
 
-        return gateway.receive(packet)
+        rng = rng or random
+        if try_deliver(distance, self.energy_model.settings, rng):
+            return gateway.receive(packet)
+
+        self.packets_dropped += 1
+        return False
 
     def receive(self):
         """Receive one packet (used by gateway / other nodes later)."""
@@ -117,5 +134,5 @@ class Node:
     def __repr__(self):
         return (
             f"Node(id={self.id}, energy={self.energy:.4f}, "
-            f"state={self.state}, sent={self.packets_sent})"
+            f"state={self.state}, sent={self.packets_sent}, aoi={self.aoi})"
         )

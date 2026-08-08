@@ -1,0 +1,62 @@
+{
+  "always_transmit": {
+    "lifetime_steps": 15.4,
+    "alive_final": 0.0,
+    "dead_final": 3.0,
+    "packets_sent": 37.8,
+    "packets_received": 26.6,
+    "packets_dropped": 11.2,
+    "packet_delivery_ratio": 0.701538643907065,
+    "mean_aoi": 0.0,
+    "total_energy_final": 0.0,
+    "energy_used": 3.0,
+    "energy_efficiency": 8.866666666666667,
+    "steps": 15.4,
+    "episode_reward": null
+  },
+  "always_sleep": {
+    "lifetime_steps": 50.0,
+    "alive_final": 3.0,
+    "dead_final": 0.0,
+    "packets_sent": 0.0,
+    "packets_received": 0.0,
+    "packets_dropped": 0.0,
+    "packet_delivery_ratio": 0.0,
+    "mean_aoi": 50.0,
+    "total_energy_final": 2.8499999999999996,
+    "energy_used": 0.15000000000000036,
+    "energy_efficiency": 0.0,
+    "steps": 50.0,
+    "episode_reward": null
+  },
+  "random": {
+    "lifetime_steps": 33.0,
+    "alive_final": 0.0,
+    "dead_final": 3.0,
+    "packets_sent": 37.4,
+    "packets_received": 26.2,
+    "packets_dropped": 11.2,
+    "packet_delivery_ratio": 0.6976876703192493,
+    "mean_aoi": 0.0,
+    "total_energy_final": 0.0,
+    "energy_used": 3.0,
+    "energy_efficiency": 8.733333333333333,
+    "steps": 33.0,
+    "episode_reward": 26.963743093250862
+  },
+  "dqn": {
+    "lifetime_steps": 49.4,
+    "alive_final": 0.8,
+    "dead_final": 2.2,
+    "packets_sent": 38.8,
+    "packets_received": 29.4,
+    "packets_dropped": 9.4,
+    "packet_delivery_ratio": 0.7578021978021978,
+    "mean_aoi": 16.2,
+    "total_energy_final": 0.027749533984900997,
+    "energy_used": 2.972250466015099,
+    "energy_efficiency": 9.894969676196329,
+    "steps": 49.4,
+    "episode_reward": 29.815148678185164
+  }
+}

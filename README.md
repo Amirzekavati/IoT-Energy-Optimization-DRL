@@ -7,6 +7,7 @@
 ## Features
 
 - IoT network simulation (Node, Packet, Gateway, Energy model)
+- Distance-aware TX energy + simple packet-loss channel + AoI
 - Baseline policies: Always Transmit / Always Sleep / Random
 - Deep Q-Network with Stable-Baselines3
 - Metrics and policy comparison charts

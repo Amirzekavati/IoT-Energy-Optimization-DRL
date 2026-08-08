@@ -198,7 +198,7 @@
       <section>
         <h2>اهداف</h2>
         <ul>
-          <li>شبیه‌سازی شبکه IoT با مدل انرژی</li>
+          <li>شبیه‌سازی با انرژی فاصله‌آگاه و افت بسته</li>
           <li>آموزش DQN برای تصمیم ارسال یا خواب</li>
           <li>مقایسه با Always Transmit / Sleep / Random</li>
           <li>داشبورد تعاملی با Streamlit</li>
@@ -220,10 +220,10 @@
       <section>
         <h2>روش</h2>
         <ul>
-          <li>حالت نود: active / sleep / dead</li>
-          <li>مشاهده: انرژی + زنده بودن + زمان</li>
-          <li>عمل: Sleep یا Transmit برای هر نود</li>
-          <li>پاداش: بسته و عمر بیشتر − مصرف انرژی</li>
+          <li>TX انرژی وابسته به فاصله</li>
+          <li>کانال ساده با احتمال drop</li>
+          <li>معیار AoI برای تازگی داده</li>
+          <li>پاداش: بسته/عمر − انرژی/AoI/drop</li>
         </ul>
         <figure>
           <img src="../../assets/charts/energy_curves.png" alt="Energy curves" />
@@ -233,45 +233,45 @@
 
       <section>
         <h2>نتایج کلیدی</h2>
-        <p class="note">۳ نود، افق ۵۰، آموزش ۸۰۰۰ گام، میانگین ۵ اپیزود</p>
+        <p class="note">۳ نود، افق ۵۰، آموزش ۶۰۰۰، میانگین ۵ اپیزود</p>
         <table>
           <thead>
             <tr>
               <th>سیاست</th>
-              <th>Lifetime</th>
-              <th>Packets</th>
-              <th>Energy</th>
+              <th>Life</th>
+              <th>Pkt</th>
+              <th>PDR</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Transmit</td>
-              <td>17</td>
-              <td>48</td>
-              <td>0.00</td>
+              <td>15.4</td>
+              <td>26.6</td>
+              <td>0.70</td>
             </tr>
             <tr>
               <td>Sleep</td>
               <td>50</td>
               <td>0</td>
-              <td>2.85</td>
+              <td>0.00</td>
             </tr>
             <tr>
               <td>Random</td>
-              <td>38.6</td>
-              <td>48</td>
-              <td>0.00</td>
+              <td>33</td>
+              <td>26.2</td>
+              <td>0.70</td>
             </tr>
             <tr class="best">
               <td>DQN</td>
-              <td>50</td>
-              <td>42</td>
-              <td>0.37</td>
+              <td>49.4</td>
+              <td>29.4</td>
+              <td>0.76</td>
             </tr>
           </tbody>
         </table>
         <p class="highlight" style="margin-top:3mm;">
-          DQN عمر شبکه را حفظ می‌کند و هم‌زمان داده تحویل می‌دهد.
+          در تنظیمات رسمی گزارش، DQN بهترین مصالحه را دارد.
         </p>
         <figure>
           <img src="../../assets/charts/policy_comparison.png" alt="Policy comparison" />
@@ -283,8 +283,8 @@
     <footer>
       <section>
         <h2>نتیجه‌گیری و کارهای آینده</h2>
-        <p>DQN می‌تواند مصالحه میان تحویل بسته و حفظ انرژی را یاد بگیرد. داشبورد امکان آموزش، اجرا و مقایسه سیاست‌ها را فراهم می‌کند.</p>
-        <p><strong>آینده:</strong> Multi-Agent RL، مدل کانال واقعی، مسیریابی چندگامه، آزمایش سخت‌افزاری.</p>
+        <p>با فاصله/افت بسته/AoI، DQN از سیاست‌های ثابت بهتر مصالحه می‌کند.</p>
+        <p><strong>آینده:</strong> آموزش بهتر برای n بزرگ‌تر، Multi-Agent RL، سخت‌افزار.</p>
       </section>
       <section>
         <h2>مراجع منتخب</h2>

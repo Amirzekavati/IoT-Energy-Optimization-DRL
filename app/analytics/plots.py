@@ -40,14 +40,14 @@ def plot_metric_bars(results, metric_key, title=None, ylabel=None, ax=None):
 
 def plot_comparison_grid(results, save_path=None):
     """
-    Four key charts: lifetime, packets, remaining energy, efficiency.
+    Four key charts: lifetime, packets, AoI, PDR.
     """
     fig, axes = plt.subplots(2, 2, figsize=(10, 7))
     specs = [
         ("lifetime_steps", "Network lifetime (steps)", "Steps"),
         ("packets_received", "Packets received", "Packets"),
-        ("total_energy_final", "Remaining energy", "Joules"),
-        ("energy_efficiency", "Energy efficiency (pkt / J)", "pkt / J"),
+        ("mean_aoi", "Mean Age of Information", "Steps"),
+        ("packet_delivery_ratio", "Packet delivery ratio", "PDR"),
     ]
 
     for ax, (key, title, ylabel) in zip(axes.ravel(), specs):

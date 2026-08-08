@@ -29,12 +29,17 @@ class SmokeTests(unittest.TestCase):
         self.settings.RANDOM_SEED = 7
 
     def test_node_packet_gateway(self):
-        node = Node(1, 10, 20, self.settings.INITIAL_ENERGY)
+        node = Node(1, self.settings.GATEWAY_X, self.settings.GATEWAY_Y, self.settings.INITIAL_ENERGY)
         gateway = Gateway(self.settings.GATEWAY_X, self.settings.GATEWAY_Y)
         self.assertTrue(node.sense())
         packet = node.create_packet(step=0, size=self.settings.PACKET_SIZE)
         self.assertIsInstance(packet, Packet)
-        self.assertTrue(node.send_packet(gateway, packet))
+
+        class AlwaysDeliver:
+            def random(self):
+                return 0.0
+
+        self.assertTrue(node.send_packet(gateway, packet, rng=AlwaysDeliver()))
         self.assertEqual(gateway.total_received(), 1)
 
     def test_simulator_baselines(self):
@@ -54,7 +59,8 @@ class SmokeTests(unittest.TestCase):
     def test_rl_env_random_episode(self):
         env = IoTEnergyEnv(settings=self.settings, seed=1)
         obs, info = env.reset()
-        self.assertEqual(obs.shape[0], 2 * self.settings.NUM_NODES + 2)
+        self.assertEqual(obs.shape[0], 2 * self.settings.NUM_NODES + 3)
+
         total = 0.0
         for _ in range(self.settings.MAX_STEPS):
             obs, reward, terminated, truncated, info = env.step(env.action_space.sample())

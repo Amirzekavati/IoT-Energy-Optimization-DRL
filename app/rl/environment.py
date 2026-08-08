@@ -16,11 +16,12 @@ class IoTEnergyEnv(gym.Env):
     """
     Each step, the agent chooses transmit(1) or sleep(0) for every node.
 
-    Observation (Box, shape = 2 * num_nodes + 2):
+    Observation (Box, shape = 2 * num_nodes + 3):
       - energy ratio per node
       - alive flag per node (1/0)
       - normalized simulation step
       - gateway receive ratio (received / max possible so far)
+      - normalized mean Age of Information
 
     Action:
       - Discrete(2 ** num_nodes) when num_nodes <= 10 (DQN-friendly)
@@ -35,8 +36,7 @@ class IoTEnergyEnv(gym.Env):
         self._seed = seed if seed is not None else self.settings.RANDOM_SEED
         self.num_nodes = self.settings.NUM_NODES
 
-        # energy ratios + alive flags + step + receive ratio
-        obs_dim = 2 * self.num_nodes + 2
+        obs_dim = 2 * self.num_nodes + 3
         self.observation_space = spaces.Box(
             low=0.0,
             high=1.0,
@@ -91,7 +91,13 @@ class IoTEnergyEnv(gym.Env):
         receive_ratio = self.simulator.gateway.total_received() / max_packets
         receive_ratio = float(np.clip(receive_ratio, 0.0, 1.0))
 
-        obs = np.asarray(energy + alive + [step_norm, receive_ratio], dtype=np.float32)
+        aoi_norm = self.simulator.mean_aoi() / max(float(self.settings.MAX_STEPS), 1.0)
+        aoi_norm = float(np.clip(aoi_norm, 0.0, 1.0))
+
+        obs = np.asarray(
+            energy + alive + [step_norm, receive_ratio, aoi_norm],
+            dtype=np.float32,
+        )
         return obs
 
     def _empty_snapshot(self):
@@ -101,6 +107,8 @@ class IoTEnergyEnv(gym.Env):
             "total_energy": self.simulator.total_energy(),
             "packets_sent": self.simulator.packets_sent(),
             "packets_received": self.simulator.gateway.total_received(),
+            "packets_dropped": self.simulator.packets_dropped,
+            "mean_aoi": self.simulator.mean_aoi(),
             "actions": {},
         }
 

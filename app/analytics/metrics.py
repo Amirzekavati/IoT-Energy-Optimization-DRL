@@ -28,10 +28,16 @@ def metrics_from_history(history, summary, settings):
     if energy_used > 0:
         energy_efficiency = packets / energy_used
 
-    pdr = 0.0
+    pdr = float(summary.get("packet_delivery_ratio", 0.0))
     sent = summary.get("packets_sent", 0)
-    if sent > 0:
+    if sent > 0 and pdr == 0.0:
         pdr = packets / sent
+
+    mean_aoi = summary.get("mean_aoi")
+    if mean_aoi is None and history:
+        mean_aoi = history[-1].get("mean_aoi", 0.0)
+    if mean_aoi is None:
+        mean_aoi = 0.0
 
     return {
         "lifetime_steps": int(lifetime),
@@ -39,7 +45,9 @@ def metrics_from_history(history, summary, settings):
         "dead_final": int(summary.get("dead", 0)),
         "packets_sent": int(sent),
         "packets_received": int(packets),
+        "packets_dropped": int(summary.get("packets_dropped", 0)),
         "packet_delivery_ratio": float(pdr),
+        "mean_aoi": float(mean_aoi),
         "total_energy_final": float(summary.get("total_energy", 0.0)),
         "energy_used": float(energy_used),
         "energy_efficiency": float(energy_efficiency),
