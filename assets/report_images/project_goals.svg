@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img" aria-label="اهداف پروژه">
+  <defs><filter id="shadow" x="-10%" y="-10%" width="130%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#64748B" flood-opacity="0.28"/></filter></defs>
+  <rect width="1800" height="1100" fill="#FFFFFF"/>
+  <g stroke="#334155">
+    <line x1="900" y1="550" x2="640.0" y2="305.0" stroke-width="5"/>
+    <line x1="640.0" y1="305.0" x2="220.0" y2="160.0" stroke-width="4"/>
+    <line x1="640.0" y1="305.0" x2="220.0" y2="310.0" stroke-width="4"/>
+    <line x1="640.0" y1="305.0" x2="220.0" y2="460.0" stroke-width="4"/>
+    <line x1="900" y1="550" x2="1160.0" y2="305.0" stroke-width="5"/>
+    <line x1="1160.0" y1="305.0" x2="1580.0" y2="160.0" stroke-width="4"/>
+    <line x1="1160.0" y1="305.0" x2="1580.0" y2="310.0" stroke-width="4"/>
+    <line x1="1160.0" y1="305.0" x2="1580.0" y2="460.0" stroke-width="4"/>
+    <line x1="900" y1="550" x2="640.0" y2="795.0" stroke-width="5"/>
+    <line x1="640.0" y1="795.0" x2="220.0" y2="650.0" stroke-width="4"/>
+    <line x1="640.0" y1="795.0" x2="220.0" y2="800.0" stroke-width="4"/>
+    <line x1="640.0" y1="795.0" x2="220.0" y2="950.0" stroke-width="4"/>
+    <line x1="900" y1="550" x2="1160.0" y2="795.0" stroke-width="5"/>
+    <line x1="1160.0" y1="795.0" x2="1580.0" y2="650.0" stroke-width="4"/>
+    <line x1="1160.0" y1="795.0" x2="1580.0" y2="800.0" stroke-width="4"/>
+    <line x1="1160.0" y1="795.0" x2="1580.0" y2="950.0" stroke-width="4"/>
+  </g>
+  <g font-family="B Nazanin" font-weight="700" text-anchor="middle">
+    <g filter="url(#shadow)"><rect x="60" y="120" width="320" height="80" rx="14" fill="#99F6E4" stroke="#0D9488" stroke-width="3"/><text x="220.0" y="169.0" font-size="26" fill="#111827">محیط اینترنت اشیا</text></g>
+    <g filter="url(#shadow)"><rect x="60" y="270" width="320" height="80" rx="14" fill="#99F6E4" stroke="#0D9488" stroke-width="3"/><text x="220.0" y="319.0" font-size="26" fill="#111827">گره‌های حسگر</text></g>
+    <g filter="url(#shadow)"><rect x="60" y="420" width="320" height="80" rx="14" fill="#99F6E4" stroke="#0D9488" stroke-width="3"/><text x="220.0" y="469.0" font-size="26" fill="#111827">تولید بسته</text></g>
+    <g filter="url(#shadow)"><rect x="520" y="260" width="240" height="90" rx="16" fill="#99F6E4" stroke="#0D9488" stroke-width="3"/>
+<text x="640.0" y="315.0" font-size="30" fill="#111827">شبیه‌سازی</text></g>
+    <g filter="url(#shadow)"><rect x="1420" y="120" width="320" height="80" rx="14" fill="#FDBA74" stroke="#EA580C" stroke-width="3"/><text x="1580.0" y="169.0" font-size="26" fill="#111827">کاهش مصرف انرژی</text></g>
+    <g filter="url(#shadow)"><rect x="1420" y="270" width="320" height="80" rx="14" fill="#FDBA74" stroke="#EA580C" stroke-width="3"/><text x="1580.0" y="319.0" font-size="26" fill="#111827">طول عمر شبکه</text></g>
+    <g filter="url(#shadow)"><rect x="1420" y="420" width="320" height="80" rx="14" fill="#FDBA74" stroke="#EA580C" stroke-width="3"/><text x="1580.0" y="469.0" font-size="26" fill="#111827">زمان‌بندی خواب</text></g>
+    <g filter="url(#shadow)"><rect x="1040" y="260" width="240" height="90" rx="16" fill="#FDBA74" stroke="#EA580C" stroke-width="3"/>
+<text x="1160.0" y="315.0" font-size="30" fill="#111827">انرژی</text></g>
+    <g filter="url(#shadow)"><rect x="60" y="610" width="320" height="80" rx="14" fill="#86EFAC" stroke="#16A34A" stroke-width="3"/><text x="220.0" y="659.0" font-size="26" fill="#111827">مقایسه عملکرد</text></g>
+    <g filter="url(#shadow)"><rect x="60" y="760" width="320" height="80" rx="14" fill="#86EFAC" stroke="#16A34A" stroke-width="3"/><text x="220.0" y="809.0" font-size="26" fill="#111827">معیارهای انرژی</text></g>
+    <g filter="url(#shadow)"><rect x="60" y="910" width="320" height="80" rx="14" fill="#86EFAC" stroke="#16A34A" stroke-width="3"/><text x="220.0" y="959.0" font-size="26" fill="#111827">تحلیل تأخیر</text></g>
+    <g filter="url(#shadow)"><rect x="520" y="750" width="240" height="90" rx="16" fill="#86EFAC" stroke="#16A34A" stroke-width="3"/>
+<text x="640.0" y="805.0" font-size="30" fill="#111827">ارزیابی</text></g>
+    <g filter="url(#shadow)"><rect x="1420" y="610" width="320" height="80" rx="14" fill="#D8B4FE" stroke="#7C3AED" stroke-width="3"/><text x="1580.0" y="659.0" font-size="26" fill="#111827">عامل DQN</text></g>
+    <g filter="url(#shadow)"><rect x="1420" y="760" width="320" height="80" rx="14" fill="#D8B4FE" stroke="#7C3AED" stroke-width="3"/><text x="1580.0" y="809.0" font-size="26" fill="#111827">تصمیم‌گیری</text></g>
+    <g filter="url(#shadow)"><rect x="1420" y="910" width="320" height="80" rx="14" fill="#D8B4FE" stroke="#7C3AED" stroke-width="3"/><text x="1580.0" y="959.0" font-size="26" fill="#111827">سیاست یادگیری</text></g>
+    <g filter="url(#shadow)"><rect x="1000" y="740" width="320" height="110" rx="16" fill="#D8B4FE" stroke="#7C3AED" stroke-width="3"/>
+<text x="1160.0" y="791.0" font-size="28" fill="#111827">یادگیری تقویتی</text><text x="1160.0" y="821.0" font-size="28" fill="#111827">عمیق</text></g>
+    <circle cx="900" cy="550" r="100" fill="#FFFFFF" stroke="#EC4899" stroke-width="5"/><text x="900" y="562" font-size="36" fill="#111827">اهداف پروژه</text>
+  </g>
+</svg>

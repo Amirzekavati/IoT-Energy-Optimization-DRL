@@ -1,301 +1,417 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>پوستر — IoT Energy Optimization with DQN</title>
-  <style>
-    :root {
-      --ink: #1a2332;
-      --muted: #4a5568;
-      --line: #cfd6e0;
-      --bg: #f7f8fa;
-      --card: #ffffff;
-      --accent: #0f4c81;
-      --accent-soft: #e8f1f8;
-      --good: #1b6b3a;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      background: #d9dde5;
-      color: var(--ink);
-      font-family: "Tahoma", "Segoe UI", sans-serif;
-      line-height: 1.45;
-    }
-
-    .poster {
-      width: 210mm;
-      min-height: 297mm;
-      margin: 12px auto;
-      padding: 10mm;
-      background: var(--bg);
-      display: grid;
-      grid-template-rows: auto auto 1fr auto;
-      gap: 6mm;
-      box-shadow: 0 8px 24px rgba(0,0,0,.15);
-    }
-
-    header {
-      background: var(--accent);
-      color: #fff;
-      padding: 8mm 7mm;
-      border-radius: 4px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0 0 3mm;
-      font-size: 18pt;
-      font-weight: 700;
-    }
-
-    header .en {
-      margin: 0 0 4mm;
-      font-size: 10pt;
-      opacity: .92;
-      direction: ltr;
-      font-family: "Segoe UI", Arial, sans-serif;
-    }
-
-    header .meta {
-      margin: 0;
-      font-size: 9pt;
-      opacity: .95;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5mm;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr 0.95fr;
-      gap: 5mm;
-    }
-
-    section {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      padding: 4.5mm;
-    }
-
-    section h2 {
-      margin: 0 0 3mm;
-      font-size: 11pt;
-      color: var(--accent);
-      border-bottom: 2px solid var(--accent-soft);
-      padding-bottom: 2mm;
-    }
-
-    p, li {
-      margin: 0 0 2mm;
-      font-size: 8.5pt;
-      color: var(--ink);
-    }
-
-    ul { margin: 0; padding-right: 4.5mm; }
-
-    .highlight {
-      background: var(--accent-soft);
-      border: 1px solid #b7d0e6;
-      border-radius: 3px;
-      padding: 2.5mm 3mm;
-      font-size: 8.5pt;
-      font-weight: 700;
-      color: var(--good);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 7.5pt;
-    }
-
-    th, td {
-      border: 1px solid var(--line);
-      padding: 1.6mm 1.8mm;
-      text-align: center;
-    }
-
-    th {
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-
-    tr.best td {
-      background: #eef8f1;
-      font-weight: 700;
-    }
-
-    figure {
-      margin: 2mm 0 0;
-      text-align: center;
-    }
-
-    figure img {
-      max-width: 100%;
-      max-height: 52mm;
-      object-fit: contain;
-      border: 1px solid var(--line);
-      background: #fff;
-    }
-
-    figcaption {
-      margin-top: 1.5mm;
-      font-size: 7pt;
-      color: var(--muted);
-    }
-
-    footer {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 5mm;
-    }
-
-    .note {
-      font-size: 7.5pt;
-      color: var(--muted);
-      margin-top: 2mm;
-    }
-
-    @media print {
-      body { background: #fff; }
-      .poster {
-        margin: 0;
-        box-shadow: none;
-        width: 100%;
-        min-height: 100vh;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<title>پوستر نهایی — بهینه‌سازی انرژی IoT با DQN</title>
+<style>
+@font-face {
+  font-family: Vazirmatn;
+  src: url("../../assets/fonts/vazirmatn/Vazirmatn-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: Vazirmatn;
+  src: url("../../assets/fonts/vazirmatn/Vazirmatn-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+@font-face {
+  font-family: Vazirmatn;
+  src: url("../../assets/fonts/vazirmatn/Vazirmatn-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+@font-face {
+  font-family: Vazirmatn;
+  src: url("../../assets/fonts/vazirmatn/Vazirmatn-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+:root {
+  --navy: #14365a;
+  --navy-2: #1e4d7b;
+  --teal: #0f6b64;
+  --gold: #b45309;
+  --ink: #1b2430;
+  --muted: #4b5568;
+  --line: #d5e0ea;
+  --card: #ffffff;
+  --wash: #f3f7fb;
+  --good: #166534;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #cfd6df;
+  color: var(--ink);
+  font-family: Vazirmatn, Tahoma, sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+@page { size: 841mm 594mm; margin: 0; }
+.sheet { padding: 8mm 0; }
+.poster {
+  width: 841mm;
+  height: 594mm;
+  margin: 0 auto;
+  background: #eef3f8;
+  padding: 6mm 7mm 5mm;
+  display: grid;
+  grid-template-rows: 46mm minmax(0, 1fr) 50mm;
+  gap: 4mm;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, .22);
+  overflow: hidden;
+}
+header {
+  background: linear-gradient(90deg, #102a46, #1e4d7b 55%, #0f6b64);
+  color: #fff;
+  border-radius: 8px;
+  padding: 4mm 6mm;
+  display: grid;
+  grid-template-columns: 38mm 1fr 52mm;
+  align-items: center;
+  gap: 5mm;
+}
+.badge {
+  width: 34mm;
+  height: 34mm;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  border: 2px solid rgba(255,255,255,.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 10pt;
+  font-weight: 700;
+  line-height: 1.3;
+}
+header h1 {
+  margin: 0 0 1.5mm;
+  font-size: 23pt;
+  line-height: 1.3;
+  font-weight: 700;
+}
+header .en-title {
+  margin: 0 0 2mm;
+  font-size: 12pt;
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-family: "Segoe UI", Calibri, Vazirmatn, sans-serif;
+  opacity: .95;
+  font-weight: 600;
+}
+header .meta {
+  margin: 0;
+  font-size: 11pt;
+  opacity: .95;
+}
+.uni {
+  text-align: center;
+  font-size: 10.5pt;
+  line-height: 1.45;
+  font-weight: 600;
+}
+.en {
+  unicode-bidi: isolate;
+  direction: ltr;
+  display: inline;
+  font-family: "Segoe UI", Calibri, Vazirmatn, sans-serif;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.cols {
+  display: grid;
+  grid-template-columns: 1fr 1.12fr 1.28fr;
+  gap: 5mm;
+  min-height: 0;
+}
+section {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 4mm 4.2mm 3.5mm;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+section h2 {
+  margin: 0 0 3mm;
+  font-size: 15pt;
+  color: #fff;
+  background: var(--navy);
+  border-radius: 6px;
+  padding: 1.6mm 3mm;
+}
+section.method h2 { background: #1e4d7b; }
+section.results h2 { background: var(--teal); }
+p, li {
+  margin: 0 0 2mm;
+  font-size: 11pt;
+  line-height: 1.55;
+}
+ul { margin: 0 0 2mm; padding: 0 5mm 0 0; }
+.formula {
+  direction: ltr;
+  unicode-bidi: isolate;
+  background: #f4f8fc;
+  border: 1px solid #c9d8e8;
+  border-left: 4px solid var(--navy-2);
+  border-radius: 6px;
+  padding: 2mm 3mm;
+  margin: 1.5mm 0 2.5mm;
+  text-align: center;
+  font-family: "Cambria Math", "Times New Roman", serif;
+  font-size: 12pt;
+  line-height: 1.45;
+}
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5mm;
+  margin: 0 0 3mm;
+}
+.kpi {
+  background: var(--wash);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-align: center;
+  padding: 2mm 1mm;
+}
+.kpi b {
+  display: block;
+  font-size: 18pt;
+  color: var(--teal);
+  line-height: 1.15;
+  font-family: "Segoe UI", Vazirmatn, sans-serif;
+}
+.kpi span {
+  display: block;
+  font-size: 9pt;
+  color: var(--muted);
+  margin-top: .6mm;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10pt;
+  margin: 0 0 2.5mm;
+}
+th, td {
+  border: 1px solid #c9d6e3;
+  padding: 1.3mm 1.4mm;
+  text-align: center;
+}
+th {
+  background: var(--navy);
+  color: #fff;
+  font-weight: 600;
+}
+tr.best td {
+  background: #e7f6ee;
+  font-weight: 700;
+  color: var(--good);
+}
+figure {
+  margin: 1.5mm 0 0;
+  text-align: center;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+figure img {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: #fff;
+}
+figcaption {
+  margin-top: 1mm;
+  font-size: 8.5pt;
+  color: var(--muted);
+  font-weight: 500;
+}
+.grow { flex: 1 1 auto; min-height: 0; }
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5mm;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+.note {
+  font-size: 9.5pt;
+  color: var(--muted);
+  margin: 0 0 2mm;
+}
+.hl {
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  color: var(--good);
+  border-radius: 6px;
+  padding: 2mm 3mm;
+  font-size: 11pt;
+  font-weight: 700;
+  margin: 0 0 2mm;
+}
+footer {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1.05fr;
+  gap: 4mm;
+  min-height: 0;
+}
+footer section h2 { font-size: 12pt; padding: 1.1mm 3mm; }
+.small li, .small p { font-size: 9.5pt; line-height: 1.45; margin-bottom: 1.2mm; }
+@media print {
+  body, html {
+    background: #fff;
+    width: 841mm;
+    height: 594mm;
+    overflow: hidden;
+  }
+  .sheet { padding: 0; }
+  .poster {
+    margin: 0;
+    box-shadow: none;
+    width: 841mm;
+    height: 594mm;
+    overflow: hidden;
+  }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
 </head>
 <body>
-  <article class="poster">
-    <header>
+<div class="sheet">
+<article class="poster">
+  <header>
+    <div class="badge">پروژه<br>کارشناسی<br>۱۴۰۴–۱۴۰۵</div>
+    <div>
       <h1>بهینه‌سازی مصرف انرژی در شبکه‌های اینترنت اشیا با یادگیری تقویتی عمیق</h1>
-      <p class="en">IoT Energy Optimization using Deep Reinforcement Learning (DQN)</p>
-      <p class="meta">
-        دانشجو: امیرمحمد ذکاوتی |
-        استاد راهنما: دکتر منیره عبدوس |
-        دانشگاه شهید بهشتی |
-        ۱۴۰۴
-      </p>
-    </header>
-
-    <div class="grid">
-      <section>
-        <h2>مسئله و انگیزه</h2>
-        <p>نودهای حسگر IoT با باتری محدود کار می‌کنند. ارسال مداوم عمر شبکه را کم می‌کند و خواب بیش‌ازحد کیفیت پایش را کاهش می‌دهد.</p>
-        <p>اتصالات جهانی IoT از حدود ۲۱ میلیارد (۲۰۲۵) به حدود ۴۸ میلیارد (۲۰۳۵) می‌رسد؛ بنابراین تصمیم هوشمند Transmit/Sleep ضروری است.</p>
-      </section>
-
-      <section>
-        <h2>اهداف</h2>
-        <ul>
-          <li>شبیه‌سازی با انرژی فاصله‌آگاه و افت بسته</li>
-          <li>آموزش DQN برای تصمیم ارسال یا خواب</li>
-          <li>مقایسه با Always Transmit / Sleep / Random</li>
-          <li>داشبورد تعاملی با Streamlit</li>
-        </ul>
-      </section>
+      <p class="en-title">IoT Energy Optimization using Deep Reinforcement Learning (DQN)</p>
+      <p class="meta">دانشجو: امیرمحمد ذکاوتی &nbsp;|&nbsp; استاد راهنما: دکتر منیره عبدوس &nbsp;|&nbsp; دانشگاه شهید بهشتی</p>
     </div>
+    <div class="uni">دانشکده مهندسی و<br>علوم کامپیوتر<br><span class="en">DQN + Gymnasium</span></div>
+  </header>
 
-    <div class="grid-3">
-      <section>
-        <h2>معماری سیستم</h2>
-        <p><strong>UI → Simulation → RL (DQN) → Analytics</strong></p>
+  <div class="cols">
+    <section>
+      <h2>۱. مسئله و اهداف</h2>
+      <p>گره‌های حسگر با باتری محدود در هر گام باید بین <b>ارسال</b> و <b>خواب</b> یکی را انتخاب کنند. ارسالِ بیشتر داده را تازه نگه می‌دارد اما عمر شبکه را کوتاه می‌کند؛ خوابِ بیشتر انرژی را حفظ می‌کند اما سرویس پایش را از بین می‌برد.</p>
+      <p>طبق <span class="en" dir="ltr" lang="en">Transforma Insights</span> اتصالات جهانی <span class="en" dir="ltr" lang="en">IoT</span> از حدود ۲۱ میلیارد (۲۰۲۵) به حدود ۴۸ میلیارد (۲۰۳۵) می‌رسد؛ بنابراین تصمیم تطبیقی ضروری است [1].</p>
+      <figure>
+        <img src="../../assets/report_images/iot_ecosystem_overview.png" alt="اکوسیستم اینترنت اشیا">
+        <figcaption>شکل ۱. لایه تمرکز پروژه: گره‌های حسگر تا دروازه</figcaption>
+      </figure>
+      <figure class="grow">
+        <img src="../../assets/report_images/Energy Optimization.png" alt="مسئله بهینه‌سازی">
+        <figcaption>شکل ۲. سه ضلع مسئله: انرژی، تأخیر اطلاعاتی، اتلاف بسته</figcaption>
+      </figure>
+      <ul>
+        <li>شبیه‌ساز فاصله‌آگاه با افت بسته و معیار <span class="en" dir="ltr" lang="en">AoI</span></li>
+        <li>آموزش عامل <span class="en" dir="ltr" lang="en">DQN</span> در محیط <span class="en" dir="ltr" lang="en">Gymnasium</span></li>
+        <li>مقایسه با <span class="en" dir="ltr" lang="en">Always Transmit</span> / <span class="en" dir="ltr" lang="en">Sleep</span> / <span class="en" dir="ltr" lang="en">Random</span></li>
+        <li>داشبورد تعاملی <span class="en" dir="ltr" lang="en">Streamlit</span></li>
+      </ul>
+    </section>
+
+    <section class="method">
+      <h2>۲. روش پیشنهادی</h2>
+      <figure>
+        <img src="../../assets/report_images/system_architecture_fa.png" alt="معماری سامانه">
+        <figcaption>شکل ۳. معماری چهارلایه: رابط، شبیه‌سازی، یادگیری، تحلیل</figcaption>
+      </figure>
+      <figure>
+        <img src="../../assets/report_images/method_pipeline_flow.png" alt="جریان روش">
+        <figcaption>شکل ۴. جریان اجرا از تنظیم پارامتر تا مقایسه سیاست‌ها</figcaption>
+      </figure>
+      <p>هزینه ارسال با فاصله تا دروازه افزایش می‌یابد و انرژی تلاش ارسال حتی در صورت افت بسته مصرف می‌شود:</p>
+      <div class="formula">E<sub>tx</sub>(d) = E<sub>TX</sub> · [1 + w · (d / d<sub>ref</sub>)<sup>2</sup>]</div>
+      <div class="formula">p(d) = clip(1 − λ · (d / d<sub>ref</sub>), 0.45, 1)</div>
+      <p>مشاهده محیط ابعاد <span class="en" dir="ltr">2n+3</span> دارد (انرژی، حیات، زمان، نسبت دریافت، <span class="en" dir="ltr" lang="en">AoI</span>). برای <span class="en" dir="ltr">n ≤ 10</span> عمل به‌صورت <span class="en" dir="ltr" lang="en">Discrete(2<sup>n</sup>)</span> فشرده می‌شود تا با <span class="en" dir="ltr" lang="en">DQN</span> سازگار باشد.</p>
+      <div class="formula">r = 1.0 ΔP + 0.2 α + 0.2 η − 0.5 ΔE − 1.0 ΔD − 0.15 Ā − 0.2 ΔL</div>
+      <p class="note">ابزارها: <span class="en" dir="ltr" lang="en">Python</span>، <span class="en" dir="ltr" lang="en">Gymnasium</span>، <span class="en" dir="ltr" lang="en">Stable-Baselines3</span>، <span class="en" dir="ltr" lang="en">PyTorch</span>، <span class="en" dir="ltr" lang="en">Streamlit</span> &nbsp;|&nbsp; γ=۰٫۹۵، نرخ یادگیری ۰٫۰۰۱، بافر ۵۰۰۰۰</p>
+    </section>
+
+    <section class="results">
+      <h2>۳. نتایج رسمی</h2>
+      <p class="note">۳ گره · افق ۵۰ گام · آموزش ۶۰۰۰ · میانگین ۵ اپیزود · بذر ۴۲</p>
+      <div class="kpis">
+        <div class="kpi"><b>49.4</b><span>طول عمر <span class="en" dir="ltr" lang="en">DQN</span></span></div>
+        <div class="kpi"><b>29.4</b><span>بسته موفق</span></div>
+        <div class="kpi"><b>0.76</b><span>نسبت تحویل</span></div>
+        <div class="kpi"><b>16.2</b><span>میانگین <span class="en" dir="ltr" lang="en">AoI</span></span></div>
+      </div>
+      <div class="hl"><span class="en" dir="ltr" lang="en">DQN</span> عمری نزدیک خواب دائمی دارد، اما از ارسال دائمی بسته و <span class="en" dir="ltr" lang="en">PDR</span> بهتری می‌سازد.</div>
+      <table>
+        <thead>
+          <tr>
+            <th>سیاست</th>
+            <th>عمر</th>
+            <th>بسته</th>
+            <th>افت</th>
+            <th><span class="en" dir="ltr" lang="en">PDR</span></th>
+            <th><span class="en" dir="ltr" lang="en">AoI</span></th>
+            <th>باقی انرژی</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="en" dir="ltr" lang="en">Always TX</span></td><td>15.4</td><td>26.6</td><td>11.2</td><td>0.70</td><td>—</td><td>0.00</td></tr>
+          <tr><td><span class="en" dir="ltr" lang="en">Always Sleep</span></td><td>50.0</td><td>0.0</td><td>0.0</td><td>0.00</td><td>50.0</td><td>2.85</td></tr>
+          <tr><td><span class="en" dir="ltr" lang="en">Random</span></td><td>33.0</td><td>26.2</td><td>11.2</td><td>0.70</td><td>—</td><td>0.00</td></tr>
+          <tr class="best"><td><span class="en" dir="ltr" lang="en">DQN</span></td><td>49.4</td><td>29.4</td><td>9.4</td><td>0.76</td><td>16.2</td><td>0.03</td></tr>
+        </tbody>
+      </table>
+      <figure class="grow">
+        <img src="../../assets/charts/policy_comparison.png" alt="مقایسه سیاست‌ها">
+        <figcaption>شکل ۵. مقایسه طول عمر، بسته، <span class="en" dir="ltr" lang="en">AoI</span> و <span class="en" dir="ltr" lang="en">PDR</span></figcaption>
+      </figure>
+      <div class="pair">
         <figure>
-          <img src="../../assets/architecture/high_level_architecture.png" alt="High-level architecture" />
-          <figcaption>معماری چهارلایه‌ای سامانه</figcaption>
+          <img src="../../assets/charts/energy_curves.png" alt="منحنی انرژی">
+          <figcaption>شکل ۶. انرژی کل در زمان</figcaption>
         </figure>
-        <p class="note">ابزارها: Python، Gymnasium، Stable-Baselines3، Streamlit</p>
-      </section>
-
-      <section>
-        <h2>روش</h2>
-        <ul>
-          <li>TX انرژی وابسته به فاصله</li>
-          <li>کانال ساده با احتمال drop</li>
-          <li>معیار AoI برای تازگی داده</li>
-          <li>پاداش: بسته/عمر − انرژی/AoI/drop</li>
-        </ul>
         <figure>
-          <img src="../../assets/charts/energy_curves.png" alt="Energy curves" />
-          <figcaption>انرژی کل در طول زمان</figcaption>
+          <img src="../../assets/charts/aoi_curves.png" alt="منحنی سن اطلاعات">
+          <figcaption>شکل ۷. میانگین <span class="en" dir="ltr" lang="en">AoI</span> در زمان</figcaption>
         </figure>
-      </section>
+      </div>
+    </section>
+  </div>
 
-      <section>
-        <h2>نتایج کلیدی</h2>
-        <p class="note">۳ نود، افق ۵۰، آموزش ۶۰۰۰، میانگین ۵ اپیزود</p>
-        <table>
-          <thead>
-            <tr>
-              <th>سیاست</th>
-              <th>Life</th>
-              <th>Pkt</th>
-              <th>PDR</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Transmit</td>
-              <td>15.4</td>
-              <td>26.6</td>
-              <td>0.70</td>
-            </tr>
-            <tr>
-              <td>Sleep</td>
-              <td>50</td>
-              <td>0</td>
-              <td>0.00</td>
-            </tr>
-            <tr>
-              <td>Random</td>
-              <td>33</td>
-              <td>26.2</td>
-              <td>0.70</td>
-            </tr>
-            <tr class="best">
-              <td>DQN</td>
-              <td>49.4</td>
-              <td>29.4</td>
-              <td>0.76</td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="highlight" style="margin-top:3mm;">
-          در تنظیمات رسمی گزارش، DQN بهترین مصالحه را دارد.
-        </p>
-        <figure>
-          <img src="../../assets/charts/policy_comparison.png" alt="Policy comparison" />
-          <figcaption>مقایسه معیارهای سیاست‌ها</figcaption>
-        </figure>
-      </section>
-    </div>
-
-    <footer>
-      <section>
-        <h2>نتیجه‌گیری و کارهای آینده</h2>
-        <p>با فاصله/افت بسته/AoI، DQN از سیاست‌های ثابت بهتر مصالحه می‌کند.</p>
-        <p><strong>آینده:</strong> آموزش بهتر برای n بزرگ‌تر، Multi-Agent RL، سخت‌افزار.</p>
-      </section>
-      <section>
-        <h2>مراجع منتخب</h2>
-        <ul>
-          <li>[1] Transforma Insights, 2026</li>
-          <li>[4] Heinzelman et al., LEACH, 2000</li>
-          <li>[8] Banerjee et al., NashDQNSleep, 2025</li>
-          <li>[9] Leong et al., DRL Scheduling, 2018</li>
-        </ul>
-      </section>
-    </footer>
-  </article>
+  <footer>
+    <section>
+      <h2>۴. نتیجه‌گیری</h2>
+      <ul class="small">
+        <li>ارسال دائمی شبکه را حدود گام ۱۵ از کار می‌اندازد و بخشی از انرژی را روی بسته ناموفق تلف می‌کند.</li>
+        <li>خواب دائمی عمر کامل دارد ولی صفر سرویس و <span class="en" dir="ltr" lang="en">AoI</span> برابر ۵۰ می‌دهد.</li>
+        <li><span class="en" dir="ltr" lang="en">DQN</span> با عمر ۴۹٫۴، ۲۹٫۴ بسته موفق و <span class="en" dir="ltr" lang="en">PDR</span> برابر ۰٫۷۶ بهترین مصالحه را در همین تنظیمات نشان داد.</li>
+        <li>اعداد فقط برای ۳ گره / افق ۵۰ / آموزش ۶۰۰۰ معتبرند؛ با ۱۰ گره و آموزش کوتاه ممکن است همگرا نشود.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>محدودیت و کارهای آینده</h2>
+      <ul class="small">
+        <li>ارتباط تک‌گام به دروازه؛ بدون مسیریابی چندگامه و بدون صف جداگانه</li>
+        <li>مدل کانال و انرژی آموزشی است، نه لایه فیزیکی کامل</li>
+        <li>فضای عمل فشرده برای n&gt;۱۰ مقیاس‌پذیر نیست</li>
+        <li><b>آینده:</b> <span class="en" dir="ltr" lang="en">PPO</span> یا چندعاملی، مشاهده فاصله/کانال، آزمایش سخت‌افزار مثل <span class="en" dir="ltr" lang="en">ESP32</span></li>
+      </ul>
+    </section>
+    <section class="small">
+      <h2>مراجع منتخب</h2>
+      <p>[1] Transforma Insights, 2026.</p>
+      <p>[4] Heinzelman et al., <span class="en" dir="ltr" lang="en">LEACH</span>, 2000.</p>
+      <p>[7] Liu et al., <span class="en" dir="ltr" lang="en">EDRP-GTDQN</span>, 2025.</p>
+      <p>[8] Banerjee et al., <span class="en" dir="ltr" lang="en">NashDQNSleep</span>, 2025.</p>
+      <p>[9] Leong et al., <span class="en" dir="ltr" lang="en">DRL</span> Sensor Scheduling, 2018.</p>
+      <p class="note" style="margin-top:1.5mm;">بازسازی پوستر: <span class="en" dir="ltr" lang="en">python scripts/build_final_poster.py</span></p>
+    </section>
+  </footer>
+</article>
+</div>
 </body>
 </html>
