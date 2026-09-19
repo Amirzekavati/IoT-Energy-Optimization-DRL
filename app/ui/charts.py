@@ -71,17 +71,31 @@ def render_comparison(metrics_by_policy, histories=None):
         st.info("No comparison results yet.")
         return
 
+    df = df.rename(
+    columns={
+        "lifetime_steps": "Lifetime (step)",
+        "packets_received": "Packets Received (packet)",
+        "packets_dropped": "Packets Dropped (packet)",
+        "packet_delivery_ratio": "PDR",
+        "mean_aoi": "Mean AoI (step)",
+        "total_energy_final": "Remaining Energy (J)",
+        "energy_efficiency": "Energy Efficiency (packet/J)",
+        # "episode_reward": "Episode Reward",
+    }
+    )
+
     show_cols = [
         c
         for c in [
             "policy",
-            "lifetime_steps",
-            "packets_received",
-            "packet_delivery_ratio",
-            "mean_aoi",
-            "total_energy_final",
-            "energy_efficiency",
-            "episode_reward",
+            "Lifetime (step)",
+            "Packets Received (packet)",
+            "Packets Dropped (packet)",
+            "PDR",
+            "Mean AoI (step)",
+            "Remaining Energy (J)",
+            "Energy Efficiency (packet/J)",
+            # "Episode Reward",
         ]
         if c in df.columns
     ]
@@ -119,3 +133,198 @@ def render_comparison(metrics_by_policy, histories=None):
             )
             st.subheader("Energy over time by policy")
             st.line_chart(pivot)
+
+
+def render_training_reward(reward_log):
+    """
+    Display DQN training reward curve.
+
+    reward_log:
+        pandas DataFrame from reward_log.csv
+    """
+
+    if reward_log is None or reward_log.empty:
+        st.info("No DQN reward log available.")
+        return
+
+
+    if "total_reward" not in reward_log.columns:
+        st.warning(
+            "Reward log does not contain total_reward."
+        )
+        return
+
+
+    st.subheader(
+        "DQN Training Reward"
+    )
+
+
+    if "step" in reward_log.columns:
+
+        chart_data = (
+            reward_log
+            .set_index("step")
+            [["total_reward"]]
+        )
+
+    else:
+
+        chart_data = reward_log[
+            ["total_reward"]
+        ]
+
+
+    st.line_chart(chart_data)
+   
+   
+    
+def render_reward_components(reward_log):
+
+    """
+    Show individual reward components.
+    """
+
+    if reward_log is None or reward_log.empty:
+        return
+
+
+    columns = [
+        "packet_reward",
+        "alive_reward",
+        "energy_reward",
+        "energy_penalty",
+        "death_penalty",
+        "aoi_penalty",
+        "drop_penalty",
+    ]
+
+
+    available = [
+        c for c in columns
+        if c in reward_log.columns
+    ]
+
+
+    if not available:
+        st.info(
+            "No reward components found."
+        )
+        return
+
+
+    st.subheader(
+        "Reward Components"
+    )
+
+
+    if "step" in reward_log.columns:
+
+        chart_data = (
+            reward_log
+            .set_index("step")
+            [available]
+        )
+
+    else:
+
+        chart_data = reward_log[
+            available
+        ]
+
+
+    st.line_chart(chart_data)
+    
+def render_dqn_loss(loss_log):
+
+    """
+    Display DQN loss curve.
+
+    loss_log:
+        DataFrame with step and loss columns
+    """
+
+    if loss_log is None or loss_log.empty:
+        st.info(
+            "No DQN loss data available."
+        )
+        return
+
+
+    if "loss" not in loss_log.columns:
+        st.warning(
+            "Loss column not found."
+        )
+        return
+
+
+    st.subheader(
+        "DQN Training Loss"
+    )
+
+
+    if "step" in loss_log.columns:
+
+        chart_data = (
+            loss_log
+            .set_index("step")
+            [["loss"]]
+        )
+
+    else:
+
+        chart_data = loss_log[
+            ["loss"]
+        ]
+
+
+    st.line_chart(chart_data)
+    
+def render_average_reward(reward_log, window=100):
+    """
+    Display moving average of DQN reward.
+    """
+
+    if reward_log is None or reward_log.empty:
+        st.info("No reward data available.")
+        return
+
+
+    if "total_reward" not in reward_log.columns:
+        st.warning(
+            "total_reward column not found."
+        )
+        return
+
+
+    reward_log = reward_log.copy()
+
+
+    reward_log["moving_average_reward"] = (
+        reward_log["total_reward"]
+        .rolling(window=window)
+        .mean()
+    )
+
+
+    st.subheader(
+        f"Moving Average Reward (window={window})"
+    )
+
+
+    if "step" in reward_log.columns:
+
+        chart_data = (
+            reward_log
+            .set_index("step")
+            [["moving_average_reward"]]
+        )
+
+    else:
+
+        chart_data = reward_log[
+            ["moving_average_reward"]
+        ]
+
+
+    st.line_chart(chart_data)

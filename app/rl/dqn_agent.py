@@ -36,19 +36,21 @@ class DQNAgent:
             tau=1.0,
             train_freq=4,
             target_update_interval=500,
-            exploration_fraction=0.3,
+            exploration_fraction=0.15,
             exploration_final_eps=0.05,
             verbose=0,
             seed=self.seed,
+            tensorboard_log="experiments/tensorboard/",
+
         )
 
-    def learn(self, total_timesteps=None, progress_bar=False):
+    def learn(self, total_timesteps=None, progress_bar=False, callback=None):
         timesteps = (
             self.settings.TRAIN_TIMESTEPS
             if total_timesteps is None
             else total_timesteps
         )
-        self.model.learn(total_timesteps=timesteps, progress_bar=progress_bar)
+        self.model.learn(total_timesteps=timesteps, progress_bar=progress_bar, callback=callback, tb_log_name=f"DQN_{self.settings.NUM_NODES}_nodes")
         return self
 
     def predict(self, observation, deterministic=True):

@@ -27,6 +27,7 @@ class Simulator:
         self.current_step = 0
         self.history = []
         self.packets_dropped = 0
+        self.aoi_history = []
 
         self._rng = random.Random(self.seed)
         self.setup()
@@ -93,6 +94,7 @@ class Simulator:
         before_dropped = node.packets_dropped
         ok = node.send_packet(self.gateway, packet, rng=self._rng)
         if node.packets_dropped > before_dropped:
+            # print("PACKET DROP:",node.id,node.packets_dropped)
             self.packets_dropped += 1
         return ok
 
@@ -138,6 +140,7 @@ class Simulator:
         self._update_aoi(delivered_ids)
 
         snapshot = self._snapshot(actions)
+        self.aoi_history.append(snapshot["mean_aoi"])
         self.history.append(snapshot)
         self.current_step += 1
         return snapshot
@@ -170,7 +173,7 @@ class Simulator:
             "packets_received": received,
             "packets_dropped": self.packets_dropped,
             "packet_delivery_ratio": pdr,
-            "mean_aoi": self.mean_aoi(),
+            "mean_aoi": (sum(self.aoi_history) / len(self.aoi_history) if self.aoi_history  else 0.0),
         }
 
     def __repr__(self):

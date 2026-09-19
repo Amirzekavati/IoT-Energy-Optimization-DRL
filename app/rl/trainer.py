@@ -8,6 +8,7 @@ from app.config.settings import Settings
 from app.rl.dqn_agent import DQNAgent
 from app.rl.environment import IoTEnergyEnv
 
+from app.rl.callbacks import RewardLoggerCallback
 
 DEFAULT_MODEL_PATH = Path("experiments/models/dqn_iot_energy")
 
@@ -48,7 +49,7 @@ def train_dqn(
     settings=None,
     total_timesteps=None,
     model_path=None,
-    eval_episodes=3,
+    eval_episodes=5,
     seed=None,
     progress_bar=False,
 ):
@@ -59,11 +60,19 @@ def train_dqn(
     """
     settings = settings or Settings()
     seed = settings.RANDOM_SEED if seed is None else seed
-    model_path = Path(model_path) if model_path else DEFAULT_MODEL_PATH
-
+    
+    if model_path:
+        model_path = Path(model_path)
+    else:
+        model_path = (Path("experiments/models")/f"nodes_{settings.NUM_NODES}"/"dqn_iot_energy")
+        
+    log_dir = (Path("experiments")/f"nodes_{settings.NUM_NODES}")
+    log_dir.mkdir(parents=True,exist_ok=True)
+    
     env = IoTEnergyEnv(settings=settings, seed=seed)
     agent = DQNAgent(env=env, settings=settings, seed=seed)
-    agent.learn(total_timesteps=total_timesteps, progress_bar=progress_bar)
+    reward_callback = RewardLoggerCallback(save_path=log_dir/"reward_log.csv")
+    agent.learn(total_timesteps=total_timesteps, progress_bar=progress_bar, callback=reward_callback)
 
     saved_path = agent.save(model_path)
     evaluation = evaluate_agent(

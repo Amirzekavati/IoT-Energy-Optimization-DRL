@@ -4,6 +4,10 @@ Main Streamlit dashboard page.
 
 from pathlib import Path
 
+from app.analytics.tensorboard_reader import (
+    load_tensorboard_loss
+)
+import pandas as pd
 import streamlit as st
 
 from app.analytics import compare_policies, run_env_policy, run_simulator_policy
@@ -11,8 +15,12 @@ from app.rl import DQNAgent, train_dqn
 from app.simulation import AlwaysSleepScheduler, Scheduler
 from app.ui.charts import (
     render_comparison,
+    render_dqn_loss,
     render_history_charts,
     render_summary_metrics,
+    render_training_reward,
+    render_reward_components,
+    render_average_reward
 )
 from app.ui.controls import render_controls
 from app.ui.node_manager import render_network_map, render_node_table
@@ -74,17 +82,31 @@ def run_dashboard():
         st.session_state.last_result = None
     if "comparison" not in st.session_state:
         st.session_state.comparison = None
+    if "training_logs" not in st.session_state:
+        st.session_state.training_logs = None
+        
+
+    model_dir = (Path(settings.MODEL_DIR)/f"nodes_{settings.NUM_NODES}")
+    model_dir.mkdir(parents=True,exist_ok=True)
 
     if controls["train_clicked"]:
         with st.spinner(f"Training DQN for {controls['train_timesteps']} timesteps..."):
             result = train_dqn(
                 settings=settings,
                 total_timesteps=controls["train_timesteps"],
-                model_path=Path(settings.MODEL_DIR) / settings.MODEL_NAME,
-                eval_episodes=1,
+                model_path=model_dir/settings.MODEL_NAME,
+                eval_episodes=5,
                 seed=settings.RANDOM_SEED,
             )
         st.session_state.dqn_agent = result["agent"]
+        
+        # Save training log location
+        reward_log_path = (Path("experiments")/f"nodes_{settings.NUM_NODES}"/"reward_log.csv")
+
+        st.session_state.training_logs = {
+            "reward_log": reward_log_path
+        }
+        st.session_state.training_logs = {"reward_log": reward_log_path}        
         st.success(
             f"DQN trained and saved to `{result['model_path']}`. "
             f"Eval mean reward: {result['evaluation']['mean_reward']:.2f}"
@@ -100,7 +122,7 @@ def run_dashboard():
         elif policy_name == "dqn":
             agent = st.session_state.dqn_agent
             if agent is None:
-                model_path = Path(settings.MODEL_DIR) / settings.MODEL_NAME
+                model_path = model_dir/settings.MODEL_NAME,
                 zip_path = Path(str(model_path) + ".zip")
                 if zip_path.exists() or Path(str(model_path)).exists():
                     with st.spinner("Loading saved DQN model..."):
@@ -126,7 +148,7 @@ def run_dashboard():
                 settings=settings,
                 agent=agent,
                 seed=settings.RANDOM_SEED,
-                n_episodes=3,
+                n_episodes=5,
             )
         if agent is None:
             st.info("Compared baselines only. Train DQN to include it in the table.")
@@ -144,6 +166,58 @@ def run_dashboard():
         left, right = st.columns([1.2, 1])
         with left:
             render_history_charts(result["history"])
+        
+        st.divider()
+        st.header("DQN Training Analysis")
+        
+        if st.session_state.training_logs is not None:
+
+            reward_path = (
+                st.session_state.training_logs["reward_log"]
+            )
+
+
+            if reward_path.exists():
+
+                reward_df = pd.read_csv(
+                    reward_path
+                )
+
+                render_training_reward(
+                    reward_df
+                )
+                
+                loss_df = load_tensorboard_loss(
+                    "experiments/tensorboard"
+                )
+
+
+                render_dqn_loss(
+                    loss_df
+                )
+                
+                render_average_reward(
+                        reward_df,
+                        window=100
+                )
+
+                render_reward_components(
+                    reward_df
+                )
+
+            else:
+
+                st.info(
+                    "Reward log is not available yet."
+                )
+
+        else:
+
+            st.info(
+                "Train DQN to display training analysis."
+            )
+        
+        
         with right:
             render_network_map(result["nodes"], result["gateway"])
             render_node_table(result["nodes"])

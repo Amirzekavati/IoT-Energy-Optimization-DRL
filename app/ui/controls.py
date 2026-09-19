@@ -101,6 +101,14 @@ def render_controls():
         value=min(defaults.TRAIN_TIMESTEPS, 3000),
         step=500,
     )
+    
+    eval_episodes = st.sidebar.number_input(
+        "Evaluation episodes",
+        min_value=1,
+        max_value=20,
+        value=5,
+        step=1,
+    )
 
     run_clicked = st.sidebar.button("Run Simulation", type="primary")
     train_clicked = st.sidebar.button("Train DQN")
@@ -120,6 +128,7 @@ def render_controls():
         "settings": settings,
         "policy_name": policy_name,
         "train_timesteps": int(train_timesteps),
+        "eval_episodes": int(eval_episodes),
         "run_clicked": run_clicked,
         "train_clicked": train_clicked,
         "compare_clicked": compare_clicked,

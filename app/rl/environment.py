@@ -7,7 +7,10 @@ import gymnasium as gym
 from gymnasium import spaces
 
 from app.config.settings import Settings
-from app.rl.reward import compute_reward
+from app.rl.reward import (
+    compute_reward,
+    compute_reward_details
+)
 from app.simulation.scheduler import Scheduler
 from app.simulation.simulator import Simulator
 
@@ -55,6 +58,8 @@ class IoTEnergyEnv(gym.Env):
 
         self.simulator = None
         self._prev_snapshot = None
+        
+        self.reward_history = []
 
     def _decode_action(self, action):
         """Convert env action to {node_id: transmit|sleep}."""
@@ -119,6 +124,7 @@ class IoTEnergyEnv(gym.Env):
 
         self.simulator = Simulator(settings=self.settings, seed=self._seed)
         self._prev_snapshot = self._empty_snapshot()
+        self.reward_history = []
         info = {"summary": self.simulator.summary()}
         return self._get_obs(), info
 
@@ -137,6 +143,8 @@ class IoTEnergyEnv(gym.Env):
             snapshot = self._empty_snapshot()
 
         reward = compute_reward(prev, snapshot, self.settings)
+        reward_details = compute_reward_details(prev, snapshot, self.settings)
+        self.reward_history.append(reward_details)
         self._prev_snapshot = snapshot
 
         obs = self._get_obs()

@@ -32,8 +32,8 @@ class Settings:
     AOI_REWARD_WEIGHT = 0.15  # penalty weight for average Age of Information
 
     # --- RL ---
-    LEARNING_RATE = 0.001
-    GAMMA = 0.95
+    LEARNING_RATE = 5e-4
+    GAMMA = 0.99
     TRAIN_TIMESTEPS = 10000
     MODEL_DIR = "experiments/models"
     MODEL_NAME = "dqn_iot_energy"
